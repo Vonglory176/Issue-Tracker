@@ -8,6 +8,10 @@ const createIssueSchema = z.object({ // 'zod' is for data validation
 })
 
 export async function POST(request: NextRequest) {
+    // console.log("Hello World")
+    // const body = await request.json()
+    // return NextResponse.json("Hello World", { status: 200 })
+
     const body = await request.json()
     const validation = createIssueSchema.safeParse(body)
 
