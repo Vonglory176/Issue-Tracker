@@ -54,7 +54,7 @@ export default function RootLayout({
 
 /*
 
-Video --> https://youtu.be/J9sfR6HN6BY?t=4070 (1:07:50)
+Video --> https://youtu.be/J9sfR6HN6BY?t=4487 (1:14:47)
 Good extra info --> https://www.youtube.com/watch?v=J9sfR6HN6BY
 
 BUGS ---------------------------------------------------------------------------
