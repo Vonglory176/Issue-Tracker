@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import "@radix-ui/themes/styles.css";
+import { Theme } from "@radix-ui/themes";
 import "./globals.css";
 import NavBar from "./NavBar";
 
@@ -28,9 +30,13 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <NavBar />
+        <Theme> {/* appearance="light" accentColor="iris" */}
 
-        <main className="p-5">{children}</main>
+          <NavBar />
+
+          <main className="p-5">{children}</main>
+
+        </Theme>
 
 
       </body>
@@ -40,11 +46,12 @@ export default function RootLayout({
 
 /*
 
-Video --> https://youtu.be/J9sfR6HN6BY
+Video --> https://youtu.be/J9sfR6HN6BY?t=2576 (42:56)
 Good extra info --> https://www.youtube.com/watch?v=J9sfR6HN6BY
 
 BUGS ---------------------------------------------------------------------------
 
+ThunderClient 'Create Issue' API is not working for some reason. Maybe prisma is not being initialized correctly? (41:58)
 
 IDEAS ---------------------------------------------------------------------------
 
