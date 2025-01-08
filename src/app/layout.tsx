@@ -34,7 +34,7 @@ export default function RootLayout({
 
           <NavBar />
 
-          <main className="p-5">{children}</main>
+          <main className="">{children}</main>
 
         </Theme>
 
@@ -51,7 +51,7 @@ Good extra info --> https://www.youtube.com/watch?v=J9sfR6HN6BY
 
 BUGS ---------------------------------------------------------------------------
 
-ThunderClient 'Create Issue' API is not working for some reason. Maybe prisma is not being initialized correctly? (41:58)
+ThunderClient 'Create Issue' API is not working for some reason. Does not seem to be related to prisma. (41:58)
 
 IDEAS ---------------------------------------------------------------------------
 
