@@ -1,11 +1,12 @@
 'use client'
 
-import { Button, TextField } from '@radix-ui/themes'
+import { Button, Callout, TextField } from '@radix-ui/themes'
 import 'easymde/dist/easymde.min.css'
 import { Controller, useForm } from 'react-hook-form'
 import axios from 'axios'
 import { useRouter } from 'next/navigation'
 import dynamic from 'next/dynamic'
+import { useState } from 'react'
 
 // Dynamically import SimpleMDE to ensure it only runs on the client
 const SimpleMDE = dynamic(() => import('react-simplemde-editor'), { ssr: false })
@@ -19,25 +20,46 @@ interface IssueForm {
 const NewIssuePage = () => {
   const router = useRouter()
   const { register, control, handleSubmit } = useForm<IssueForm>()
+  const [error, setError] = useState<string | null>(null)
 
   return (
-    <form className='max-w-xl space-y-4' onSubmit={handleSubmit(async (data) => {
-      await axios.post('/api/issues', data)
-      router.push('/issues')
-    })}>
+    <div className='max-w-xl'>
 
-      <TextField.Root placeholder="Title" {...register('title')}>
-        <TextField.Slot />
-      </TextField.Root>
+      {/* Error message */}
+      {error && <Callout.Root color='red' className='mb-5'>
+        <Callout.Text>
+          {error}
+        </Callout.Text>
+      </Callout.Root>}
 
-      <Controller
-        name="description"
-        control={control}
-        render={({ field }) => <SimpleMDE placeholder="Description" {...field} />}
-      />
-      <Button>Submit New Issue</Button>
+      {/* Form */}
+      <form className='space-y-4' onSubmit={handleSubmit(async (data) => {
+        try {
 
-    </form>
+          await axios.post('/api/issues', data)
+          router.push('/issues')
+
+        } catch (error) {
+
+          setError('An unexpected error occurred')
+
+        }
+      })}>
+
+        <TextField.Root placeholder="Title" {...register('title')}>
+          <TextField.Slot />
+        </TextField.Root>
+
+        <Controller
+          name="description"
+          control={control}
+          render={({ field }) => <SimpleMDE placeholder="Description" {...field} />}
+        />
+        <Button>Submit New Issue</Button>
+
+      </form>
+
+    </div>
   )
 }
 
