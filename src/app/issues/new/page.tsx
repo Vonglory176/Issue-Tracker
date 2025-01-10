@@ -10,6 +10,7 @@ import { useState } from 'react'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { createIssueSchema } from '@/app/validationSchemas'
 import { z } from 'zod'
+import ErrorMessage from '@/components/ErrorMessage'
 
 // Dynamically import SimpleMDE to ensure it only runs on the client
 const SimpleMDE = dynamic(() => import('react-simplemde-editor'), { ssr: false })
@@ -57,7 +58,7 @@ const NewIssuePage = () => {
           <TextField.Slot />
         </TextField.Root>
 
-        {errors.title && <Text color='red' as='p'>{errors.title.message}</Text>}
+        <ErrorMessage>{errors.title?.message}</ErrorMessage>
         {/* {errors.title && <div className='text-red-500'>{errors.title.message}</div>} */}
 
         <Controller
@@ -66,7 +67,7 @@ const NewIssuePage = () => {
           render={({ field }) => <SimpleMDE placeholder="Description" {...field} />}
         />
 
-        {errors.description && <Text color='red' as='p'>{errors.description.message}</Text>}
+        <ErrorMessage>{errors.description?.message}</ErrorMessage>
         {/* {errors.description && <div className='text-red-500'>{errors.description.message}</div>} */}
 
         <Button>Submit New Issue</Button>
